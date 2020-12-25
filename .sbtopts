@@ -13,5 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
--J-Xmx4G
+-J-Xmx8G
 -J-Xss4m

@@ -17,10 +17,13 @@
 .generated-mima*
 .idea/
 .idea_modules/
+.hydra
+.metals
 .project
 .pydevproject
 .scala_dependencies
 .settings
+.vscode
 /lib/
 R-unit-tests.log
 R/unit-tests.out

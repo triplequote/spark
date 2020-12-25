@@ -270,7 +270,9 @@ object SparkBuild extends PomBuild {
       "gcs-maven-central-mirror" at "https://maven-central.storage-download.googleapis.com/maven2/",
       DefaultMavenRepository,
       Resolver.mavenLocal,
-      Resolver.file("ivyLocal", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns)
+      Resolver.file("ivyLocal", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns),
+      "Triplequote Maven Releases" at "https://repo.triplequote.com/artifactory/libs-release/",
+      "Triplequote Maven Staging Releases" at "https://repo.triplequote.com/artifactory/libs-release-staging/"
     ),
     externalResolvers := resolvers.value,
     otherResolvers := SbtPomKeys.mvnLocalRepository(dotM2 => Seq(Resolver.file("dotM2", dotM2))).value,
@@ -1126,7 +1128,7 @@ object TestSettings {
       // The number of concurrent test groups is empirically chosen based on experience
       // with Jenkins flakiness.
       if (sys.env.contains("SERIAL_SBT_TESTS")) (concurrentRestrictions in Global).value
-      else Seq(Tags.limit(Tags.ForkedTestGroup, 4))
+      else Seq(Tags.limit(com.triplequote.sbt.hydra.HydraPlugin.autoImport.HydraTag, EvaluateTask.SystemProcessors), Tags.limit(Tags.ForkedTestGroup, 4))
     }
   )
 
